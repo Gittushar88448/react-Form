@@ -3,7 +3,8 @@ import { useState } from "react";
 function App() {
   const [formData, setFormData] = useState({
     firstName: "", lastName: "", email: "", country: "",
-    streetAddress: "", city: "", state: "", zip: ""
+    streetAddress: "", city: "", state: "", zip: "",isVisible:""
+    , mode: ""
   });
 
   function changeHandler(event) {
@@ -20,7 +21,7 @@ function App() {
   return (
     <div className="App">
       <form>
-        <div className="basic-info">
+        
           <div>
             <label htmlFor="fname">First Name: </label>
 
@@ -151,7 +152,69 @@ function App() {
               id="zip"
             />
           </div>
-        </div>
+          
+          {/* radio and checkbox section */}
+
+          <p>By Email</p>
+          <div>
+            <input 
+            type="checkbox"
+            name="isVisible"
+            id="byemail"
+            />
+            <label htmlFor="byemail">
+              Comments <p>Get notified when 
+                someones posts a comment on a posting.</p>
+            </label>
+
+            <input 
+            type="checkbox"
+            name="isVisible"
+            id="byemail"
+            />
+            <label htmlFor="byemail">
+              Candidates <p>Get notified when a candidate
+                 applies for a job.</p>
+            </label>
+
+            <input 
+            type="checkbox"
+            name="isVisible"
+            id="byemail"
+            />
+            <label htmlFor="byemail">
+              Offers <p>Get notified when a candidate accepts
+                 or rejects an offer.</p>
+            </label>
+
+          </div>
+
+        <h3>Push Notifications</h3>
+        <p>These are delivered via SMS to your mobile phone.</p>
+
+        <fieldset>
+          <input
+          type="radio"
+          name="mode"
+          id="everything"
+          />
+          <label htmlFor="everything">Everything</label>
+
+          <input
+          type="radio"
+          name="mode"
+          id="everything"
+          />
+          <label htmlFor="everything">Same as email</label>
+
+          <input
+          type="radio"
+          name="mode"
+          id="everything"
+          />
+          <label htmlFor="everything">No push notifications</label>
+
+        </fieldset>
 
       </form>
     </div>
