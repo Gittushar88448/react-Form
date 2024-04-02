@@ -28,9 +28,9 @@ function App() {
 
   return (
     <div className="App">
-      <form>
+      <form className="w-8/12 flex flex-col mx-auto bg-slate-50 shadow-md items-start px-5 py-5">
         
-          <div>
+          <div className="flex flex-col ">
             <label htmlFor="fname">First Name: </label>
 
             <input className=" border-black"
