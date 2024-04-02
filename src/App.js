@@ -3,19 +3,27 @@ import { useState } from "react";
 function App() {
   const [formData, setFormData] = useState({
     firstName: "", lastName: "", email: "", country: "",
-    streetAddress: "", city: "", state: "", zip: "",isVisible:""
+    streetAddress: "", city: "", state: "", zip: "",comments:true, candidate:false , offer:false
     , mode: ""
   });
 
   function changeHandler(event) {
-    setFormData((pre) => {
+
+    setFormData(pre => {
+      const {type , name ,value , checked} = event.target;
       return {
         ...pre,
-        [event.target.name]: event.target.value
+        [name]: type === "checkbox"? checked : value
       }
     }
 
     )
+  }
+
+  function submitHandler(event){
+    event.preventDefault();
+    console.log("data is printing");
+    console.log(formData);
   }
 
   return (
@@ -29,8 +37,9 @@ function App() {
               type="text"
               onChange={changeHandler}
               placeholder="first Name"
-              name="fname"
+              name="firstName"
               id="fname"
+              value={formData.firstName}
             />
           </div>
 
@@ -43,6 +52,7 @@ function App() {
               placeholder="Last Name"
               name="lastName"
               id="lastName"
+              value={formData.lastName}
             />
           </div>
 
@@ -55,6 +65,7 @@ function App() {
               placeholder="xyz@gmail.com"
               name="email"
               id="email"
+              value={formData.email}
             />
           </div>
 
@@ -63,6 +74,7 @@ function App() {
             <select
               name="country"
               id="country"
+              value={formData.country}
               onChange={changeHandler}
             >
               <option value="">Select</option>
@@ -85,6 +97,7 @@ function App() {
               placeholder="1234 Main street "
               name="streetAddress"
               id="streetAddress"
+              value={formData.streetAddress}
             />
           </div>
 
@@ -97,6 +110,7 @@ function App() {
               placeholder="Meerut"
               name="city"
               id="city"
+              value={formData.city}
             />
           </div>
 
@@ -107,7 +121,9 @@ function App() {
               name="state"
               id="state"
               onChange={changeHandler}
+              value={formData.state}
             >
+
                 <option value="">Select</option>
                 <option value="Andhra Pradesh">Andhra Pradesh</option>
                 <option value="Arunachal Pradesh">Arunachal Pradesh</option>
@@ -150,6 +166,7 @@ function App() {
               placeholder="245206"
               name="zip"
               id="zip"
+              value={formData.zip}
             />
           </div>
           
@@ -159,30 +176,36 @@ function App() {
           <div>
             <input 
             type="checkbox"
-            name="isVisible"
-            id="byemail"
+            onChange={changeHandler}
+            name="comments"
+            id="isVisible1"
+            checked = {formData.comments}
             />
-            <label htmlFor="byemail">
+            <label htmlFor="isVisible1">
               Comments <p>Get notified when 
                 someones posts a comment on a posting.</p>
             </label>
 
             <input 
             type="checkbox"
-            name="isVisible"
-            id="byemail"
+            name="candidate"
+            onChange={changeHandler}
+            id="isVisible2"
+            checked={formData.candidate}
             />
-            <label htmlFor="byemail">
+            <label htmlFor="isVisible2">
               Candidates <p>Get notified when a candidate
                  applies for a job.</p>
             </label>
 
             <input 
             type="checkbox"
-            name="isVisible"
-            id="byemail"
+            name="offer"
+            onChange={changeHandler}
+            id="isVisible3"
+            checked={formData.offer}
             />
-            <label htmlFor="byemail">
+            <label htmlFor="isVisible3">
               Offers <p>Get notified when a candidate accepts
                  or rejects an offer.</p>
             </label>
@@ -196,25 +219,39 @@ function App() {
           <input
           type="radio"
           name="mode"
-          id="everything"
+          value="Everything"
+          onChange={changeHandler}
+          id="Everything"
+          checked = {formData.mode === 'Everything'}
           />
-          <label htmlFor="everything">Everything</label>
+          <label htmlFor="Everything">Everything</label>
 
           <input
           type="radio"
           name="mode"
-          id="everything"
+          value="sameEmail"
+          onChange={changeHandler}
+          id="sameEmail"
+          checked={formData.mode === 'sameEmail'}
+
           />
-          <label htmlFor="everything">Same as email</label>
+          <label htmlFor="sameEmail">Same as email</label>
 
           <input
           type="radio"
           name="mode"
-          id="everything"
+          value="noNotification"
+          onChange={changeHandler}
+          id="noNotification"
+          checked={formData.mode === 'noNotification'}
+
+
           />
-          <label htmlFor="everything">No push notifications</label>
+          <label htmlFor="noNotification">No push notifications</label>
 
         </fieldset>
+
+        <button type="submit" onClick={submitHandler}>Submit</button>
 
       </form>
     </div>
